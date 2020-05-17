@@ -29,3 +29,11 @@ Files are organized in the NNDM repository as follows:
  - `NNDM_spin/Classes/` contains the classes
  - `NNDM_spin/Tester/` contains files that can be used to benchmark with exact calculations when implementing a new physical model
 - `Observable_Sampler_spin/` root directory of a program sampling expectation values of observables for a time-series of RBM parameters
+
+## Requirements
+### Python 3.6
+NNDM is written in Python 3.6.
+### Specific libraries
+Numpy, scipy, cupy.
+### MPI
+Since the parallelization is optimized for cluster computing, we used MVAPICH. The MVAPICH2 software, based on MPI 3.1 standard, delivers the best performance, scalability and fault tolerance for high-end computing systems and servers using InfiniBand, Omni-Path, Ethernet/iWARP, and RoCE networking technologies. 
