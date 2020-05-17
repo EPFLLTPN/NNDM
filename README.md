@@ -22,3 +22,10 @@ The present version calculates the parameters (dynamical, steady-state) of an RB
 
 The number of floating point operations to evaluate eq. (8.11) scales as N^3_p, if we assume that the number of Metropolis-Hastings steps N_MH is set to roughly the number of parameters N_p, as in Ref. [146]. The MCMC procedure also scales with the number of connected states Ncav , i.e. with the average number of non-zero elements in a column of the Lindbladian matrix. Therefore, the efficiency of the whole procedure scales as O(N^3_p + N_pN_cav ). In order to improve the computational efficiency, we have optimized the stochastic sampling, installed a parallel scheme by splitting the MCMC chain into
 several independent threads and introduced GPU-accelerated linear algebra calculations.
+
+## Some geography
+Files are organized in the NNDM repository as follows:
+ - `NNDM_spin/` root directory of the program. It contains the main file (Heisenberg_XYZ_Main.py) and the sub-folders.
+ - `NNDM_spin/Classes/` contains the classes
+ - `NNDM_spin/Tester/` contains files that can be used to benchmark with exact calculations when implementing a new physical model
+- `Observable_Sampler_spin/` root directory of a program sampling expectation values of observables for a time-series of RBM parameters
