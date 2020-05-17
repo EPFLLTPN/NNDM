@@ -34,6 +34,43 @@ Files are organized in the NNDM repository as follows:
 ### Python 3.6
 NNDM is written in Python 3.6.
 ### Specific libraries
-Numpy, scipy, cupy.
+Numpy, scipy, cupy (for GPU calculations), lru (by amitdev).
 ### MPI
 Since the parallelization is optimized for cluster computing, we used MVAPICH. The MVAPICH2 software, based on MPI 3.1 standard, delivers the best performance, scalability and fault tolerance for high-end computing systems and servers using InfiniBand, Omni-Path, Ethernet/iWARP, and RoCE networking technologies. 
+
+# Usage
+Example of a parallel run on a local machine:
+
+`mpirun -n 4 python3.6 -u Heisenberg_XYZ_Main.py cpu lind_eu 2 2 1 1 1.1 1.2 1.0 1.0 0 10000 1500 0.2 0.000075 2 1000 '/path/to/input/input.txt' '/path/to/result/'`
+
+where cpu/gpu is the flag for cpu or gpu calculations, lind_eu is the solver type which can be chosen as:
+- lind_eu : Lindbladian Euler
+- lind_runge : Lindbladian Runge Kutta
+- ldag_full : full sampling L+L
+- ldag_y : just a predefined number drawn
+then model parameters as N_x, N_y (spin number is x/y direction), hidden node ratio, mixing node ratio, J_x, J_y, J_z, decay rate, external field, iterations, Monte Carlo sweep, thermal rate, learning rate, number drawn in case of method ldag_y, number of stored density matrix elements in dictionary (to keep in memory the frequently visited elements), input file (in case of restarting a simulation), result folder. The results of the simulations then will be printed in '/path/to/result/'. It is necessary that the folder exists.
+
+An example input file can be found in /NNDM_spin/example_input.txt
+
+Example of a parallel run file on a computational cluster using a SLURM workload manager:
+
+`#!/bin/bash`
+
+`#SBATCH --nodes 1`
+
+`#SBATCH --ntasks 8`
+
+`#SBATCH --cpus-per-task 1`
+
+`#SBATCH --time 10:00:00`
+
+`#SBATCH --account=ltpn`
+
+`module purge`
+
+`module load gcc python mvapich2`
+
+`srun python /path/to/main/Heisenberg_XYZ_Main.py 2 2 2 2 0.9 1.1 1 1 0 15000 2000 0.2 0.001 1000 /path/to/input/input.txt /path/to/output/`
+
+# License
+Except where otherwise stated, HANDE is under the 'Lesser GNU Public License v3.0'.
