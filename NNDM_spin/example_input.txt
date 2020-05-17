@@ -1,0 +1,6 @@
+500   // iteration number to restart from (for decaying regularization in SR solver
+INIT 
+4 8 8   // original number of parameter as 'nbr. of spins' 'nbr. of hidden nodes' 'nbr. of mixing nodes'
+PADDED
+4 8 8   // adding extra parameter by symmetrically copying the old ones  as 'nbr. of spins' 'nbr. of hidden nodes' 'nbr. of mixing nodes'
+-3.3936e-02 -2.9534e-02 ... // parameters of the RBM
